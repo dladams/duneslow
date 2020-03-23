@@ -13,7 +13,7 @@ elif [ -z "$DUNETPC_VERSION" ]; then
 else
 
 echo Setting up duneslow
-DUNESLOW_DIR=$(dirname $(readlink -f $BASH_SOURCE))
+export DUNESLOW_DIR=$(dirname $(readlink -f $BASH_SOURCE))
 PATH=$DUNESLOW_DIR/bin:$PATH
 TMPPATH=.:./job:
 if [ ${FHICL_FILE_PATH:0:8} = $TMPPATH ]; then FHICL_FILE_PATH=${FHICL_FILE_PATH:8}; fi
