@@ -1,0 +1,48 @@
+#!/bin/sh
+
+# test
+#
+# Run tests for project duneslow.
+# Tests are run in the current directory.
+# Project must be installed with tests and set up.
+
+runtest() {
+  COM=$1
+  ((TESTCOUNT=TESTCOUNT+1))
+  echo
+  echo "-----------------------------------------------"
+  echo Test $TESTCOUNT
+  echo Command: $1
+  echo "-----------------------------------------------"
+  $COM
+  STAT=$?
+  echo "-----------------------------------------------"
+  echo Return status: $STAT
+  echo "-----------------------------------------------"
+  return $STAT
+}
+
+PROJ=myproj
+TOPDIR=$DUNESLOW_DIR
+TSTDIR=$TOPDIR/test
+
+if [ -z "$DUNESLOW_DIR" ]; then
+  echo Please set up project $DUNESLOW
+  exit 1
+fi
+
+if [ ! -d $TSTDIR -o ! -r $TSTDIR ]; then
+  echo Unable to find test directory $TSTDIR
+  exit 2
+fi
+
+TESTCOUNT=0
+if
+  runtest $DUNESLOW_DIR/test/test_DuneSlowData
+then
+  echo
+  echo All tests pass.
+else
+  echo
+  echo Test failed.
+fi
